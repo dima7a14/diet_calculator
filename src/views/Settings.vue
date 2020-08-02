@@ -20,22 +20,44 @@
         <label for="age">Age</label>
         <input type="number" id="age" v-model.number="age" />
       </p>
+      <button type="button" @click.prevent="save">Save</button>
     </form>
   </div>
 </template>
 
 <script>
+import { read, write } from '@/controllers/storage';
+
 export default {
   name: 'v-settings',
   components: {},
   props: {},
   data() {
+    const {
+      firstName,
+      lastName,
+      sex,
+      age,
+    } = read();
+
     return {
-      firstName: '',
-      lastName: '',
-      sex: null,
-      age: 20,
+      firstName,
+      lastName,
+      sex,
+      age,
     };
+  },
+  methods: {
+    save() {
+      const data = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        sex: this.sex,
+        age: this.age,
+      };
+
+      write(data);
+    },
   },
 };
 </script>
