@@ -8,6 +8,33 @@
   </div>
 </template>
 
+<script>
+import { mapActions } from 'vuex';
+import { read } from '@/controllers/storage';
+
+export default {
+  name: 'App',
+  created() {
+    const {
+      firstName,
+      lastName,
+      sex,
+      age,
+    } = read();
+
+    this.saveUserParams({
+      firstName,
+      lastName,
+      sex,
+      age,
+    });
+  },
+  methods: {
+    ...mapActions(['saveUserParams']),
+  },
+};
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

@@ -26,8 +26,6 @@
 </template>
 
 <script>
-import { read, write } from '@/controllers/storage';
-
 export default {
   name: 'v-settings',
   components: {},
@@ -38,7 +36,7 @@ export default {
       lastName,
       sex,
       age,
-    } = read();
+    } = this.$store.state;
 
     return {
       firstName,
@@ -56,7 +54,7 @@ export default {
         age: this.age,
       };
 
-      write(data);
+      this.$store.dispatch('saveUserParams', data);
     },
   },
 };
