@@ -1,7 +1,10 @@
 import Vue from 'vue';
+import FishUI from 'fish-ui';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+
+Vue.use(FishUI);
 
 Vue.config.productionTip = false;
 

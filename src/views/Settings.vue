@@ -1,31 +1,63 @@
 <template>
-  <div class="v-settings">
-    <form>
-      <p>
-        <label for="firstName">First name</label>
-        <input type="text" id="firstName" v-model.trim="firstName" required />
-      </p>
-      <p>
-        <label for="lastName">Last name</label>
-        <input type="text" id="lastName" v-model.trim="lastName" required />
-      </p>
-      <p>
-        <label for="male">Male</label>
-        <input type="radio" id="male" value="male" v-model="sex" />
-        <br />
-        <label for="female">Female</label>
-        <input type="radio" id="female" value="female" v-model="sex" />
-      </p>
-      <p>
-        <label for="age">Age</label>
-        <input type="number" id="age" v-model.number="age" />
-      </p>
-      <button type="button" @click.prevent="save">Save</button>
-    </form>
-  </div>
+  <fish-segment class="settings">
+    <fish-form>
+      <fish-field label="First name" :rules="[{required: true}]">
+        <fish-input v-model.trim="firstName"></fish-input>
+      </fish-field>
+      <fish-field label="Last name" :rules="[{required: true}]">
+        <fish-input v-model.trim="lastName"></fish-input>
+      </fish-field>
+      <fish-field label="Sex" :rules="[{required: true}]">
+        <fish-select v-model="sex">
+          <fish-option index="male" content="Male"></fish-option>
+          <fish-option index="female" content="Female"></fish-option>
+        </fish-select>
+      </fish-field>
+      <fish-field label="Age" :rules="[{required: true}]">
+        <fish-input-number
+          min="0"
+          max="200"
+          v-model="age"
+        ></fish-input-number>
+      </fish-field>
+      <fish-field label="Weight, (kg)" :rules="[{required: true}]">
+        <fish-input-number
+          min="0"
+          v-model="weight"
+        ></fish-input-number>
+      </fish-field>
+      <fish-field label="Height, (cm)" :rules="[{required: true}]">
+        <fish-input-number
+          min="0"
+          max="300"
+          v-model="height"
+        ></fish-input-number>
+      </fish-field>
+      <fish-field label="Activity level" :rules="[{required: true}]">
+        <fish-select v-model.number="activity">
+          <fish-option :index="1.2" content="Minimal activity"></fish-option>
+          <fish-option :index="1.375" content="Weak activity"></fish-option>
+          <fish-option :index="1.55" content="Average activity"></fish-option>
+          <fish-option :index="1.725" content="High activity"></fish-option>
+          <fish-option :index="1.9" content="Extra activity"></fish-option>
+        </fish-select>
+      </fish-field>
+      <fish-message v-if="calorieLevel" type="success">
+        Youre calorie level is <strong>{{ Math.round(calorieLevel) }}</strong>
+      </fish-message>
+      <fish-button
+        type="primary"
+        size="large"
+        class="btn"
+        @click.prevent="save"
+      >Save</fish-button>
+    </fish-form>
+  </fish-segment>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'v-settings',
   components: {},
@@ -36,6 +68,9 @@ export default {
       lastName,
       sex,
       age,
+      weight,
+      height,
+      activity,
     } = this.$store.state;
 
     return {
@@ -43,15 +78,25 @@ export default {
       lastName,
       sex,
       age,
+      weight,
+      height,
+      activity,
     };
+  },
+  computed: {
+    ...mapGetters(['calorieLevel']),
   },
   methods: {
     save() {
+      // TODO: add validation?
       const data = {
         firstName: this.firstName,
         lastName: this.lastName,
         sex: this.sex,
         age: this.age,
+        weight: this.weight,
+        height: this.height,
+        activity: this.activity,
       };
 
       this.$store.dispatch('saveUserParams', data);
@@ -60,4 +105,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.settings {
+  width: 90%;
+  max-width: 480px;
+  margin: auto;
+}
+.btn {
+  margin: 1em auto 0;
+  max-width: 120px;
+}
+</style>

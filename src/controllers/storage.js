@@ -5,6 +5,9 @@ const defaultSchema = {
   lastName: '',
   sex: null,
   age: 20,
+  weight: 20,
+  height: 150,
+  activity: 1.2,
 };
 
 export function read() {

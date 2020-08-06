@@ -20,6 +20,9 @@ export default {
       lastName,
       sex,
       age,
+      weight,
+      height,
+      activity,
     } = read();
 
     this.saveUserParams({
@@ -27,6 +30,9 @@ export default {
       lastName,
       sex,
       age,
+      weight,
+      height,
+      activity,
     });
   },
   methods: {
