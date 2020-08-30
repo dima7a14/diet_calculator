@@ -43,7 +43,7 @@
         </fish-select>
       </fish-field>
       <fish-message v-if="calorieLevel" type="success">
-        Youre calorie level is <strong>{{ Math.round(calorieLevel) }}</strong>
+        Youre calorie level is <strong>{{ Math.round(calorieLevel) }}</strong> cal.
       </fish-message>
       <fish-button
         type="primary"
@@ -107,7 +107,7 @@ export default {
 
 <style scoped>
 .settings {
-  width: 90%;
+  width: 100%;
   max-width: 480px;
   margin: auto;
 }

@@ -4,14 +4,25 @@ import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
 
+export const paths = {
+  home: '/',
+  products: '/products',
+  settings: '/settings',
+};
+
 const routes = [
   {
-    path: '/',
+    path: paths.home,
     name: 'Home',
     component: Home,
   },
   {
-    path: '/settings',
+    path: paths.products,
+    name: 'Products',
+    component: () => import(/* webpackChunkName: "products" */ '../views/Products'),
+  },
+  {
+    path: paths.settings,
     name: 'Settings',
     component: () => import(/* webpackChunkName: "settings" */ '../views/Settings'),
   },

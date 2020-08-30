@@ -1,24 +1,9 @@
-# diet_calculator
+# Diet calculator
 
-## Project setup
-```
-npm install
-```
+## Calculate your daily healthy ration.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### TODO:
+ * Create Basic UI.
+ * Generate ration from available products.
+ * Multiple languages.
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
